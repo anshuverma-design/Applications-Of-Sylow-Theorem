@@ -1,0 +1,846 @@
+ 
+/* Modern Math Blog Design - Created by Trae AI */
+
+/* Base Typography and Layout */
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #16213e;
+  --accent-color: #e74c3c;
+  --text-color: #e0e0e0;
+  --bg-color: #1a1a2e;
+  --math-accent: #5da9e9;
+  --cmr12:#db67b7;
+  --header-font: 'Lora', Georgia, serif;
+  --body-font: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  --code-font: 'Courier New', monospace;
+  --animation-speed: 0.3s;
+}
+
+img[src^="index"] {
+  filter: invert(1);
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease;
+}
+
+/* Math Background Animation */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='%235da9e9' fill-opacity='0.3'%3E%3Cpath d='M50 50 L100 50 L75 75 Z'/%3E%3Cpath d='M200 50 C230 50 250 80 250 100 C250 120 230 150 200 150 C170 150 150 120 150 100 C150 80 170 50 200 50 Z'/%3E%3Cpath d='M300 50 L350 50 L350 100 L300 100 Z'/%3E%3Ctext x='75' y='200' font-family='serif' font-size='20'%3E∫%3C/text%3E%3Ctext x='125' y='200' font-family='serif' font-size='20'%3E∑%3C/text%3E%3Ctext x='175' y='200' font-family='serif' font-size='20'%3E∂%3C/text%3E%3Ctext x='225' y='200' font-family='serif' font-size='20'%3E∞%3C/text%3E%3Ctext x='275' y='200' font-family='serif' font-size='20'%3Eπ%3C/text%3E%3Ctext x='325' y='200' font-family='serif' font-size='20'%3E√%3C/text%3E%3Cpath d='M50 250 L100 250 L100 300 L50 300 Z'/%3E%3Cpath d='M150 250 L200 300 M150 300 L200 250'/%3E%3Cpath d='M250 275 m-25 0 a25 25 0 1 0 50 0 a25 25 0 1 0 -50 0'/%3E%3Cpath d='M300 250 L350 250 L325 300 Z'/%3E%3C/g%3E%3C/svg%3E");
+  animation: mathBgScroll 120s linear infinite;
+}
+
+@keyframes mathBgScroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
+  }
+}
+
+/* Floating Math Symbols */
+.math-symbol {
+  position: fixed;
+  font-size: 2rem;
+  color: var(--primary-color);
+  opacity: 0.25;
+  pointer-events: none;
+  animation: float 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+/* Main content container - Enhanced */
+.content-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: rgba(30, 30, 50, 0.95);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  position: relative;
+  border: 1px solid rgba(93, 169, 233, 0.1);
+  overflow: hidden;
+}
+
+.content-container::before, .content-container::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.content-container::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(93, 169, 233, 0.1), transparent 70%);
+}
+
+.content-container::after {
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(93, 169, 233, 0.1), transparent 30%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(1turn); }
+}
+
+/* Typography enhancements */
+.cmr-17 {
+  font-size: 170%;
+  font-family: var(--header-font);
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color var(--animation-speed);
+}
+
+.cmr-12 {
+  font-size: 120%;
+  font-family: var(--header-font);
+  color: var(--cmr12);
+  transition: color var(--animation-speed);
+}
+
+.cmbx-10 {
+  font-weight: bold;
+  color: var(--accent-color);
+  transition: color var(--animation-speed);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  line-height: 1.2;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-family: var(--header-font);
+  color: var(--primary-color);
+  transition: color var(--animation-speed), transform var(--animation-speed);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
+  transform: translateX(5px);
+}
+
+h2.titleHead {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color);
+  position: relative;
+  padding-bottom: 0.5em;
+}
+
+h2.titleHead::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+/* Paragraphs - Enhanced */
+p {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  transition: all 0.3s ease;
+  line-height: 1.7;
+  position: relative;
+}
+
+p.indent {
+  text-indent: 1.8em;
+  border-left: 2px solid rgba(93, 169, 233, 0.2);
+  padding-left: 1em;
+  margin-left: 0.5em;
+}
+
+p.noindent {
+  position: relative;
+  padding: 0.8em 1em;
+  background-color: rgba(22, 33, 62, 0.2);
+  border-radius: 6px;
+  margin: 1.5em 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+p.noindent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--math-accent), transparent);
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+p.noindent:hover::after {
+  transform: scaleX(1);
+}
+
+p + p {
+  margin-top: 1.2em;
+}
+
+p + div, p + pre {
+  margin-top: 1.5em;
+}
+
+div + p, pre + p {
+  margin-top: 1.5em;
+}
+
+/* Theorem content styling */
+.subsectionHead + p, .subsubsectionHead + p {
+  position: relative;
+  padding-left: 1em;
+  border-left: 3px solid rgba(93, 169, 233, 0.3);
+  margin-left: 1em;
+  transition: all 0.3s ease;
+}
+
+.subsectionHead + p:hover, .subsubsectionHead + p:hover {
+  border-left-color: var(--math-accent);
+  background-color: rgba(93, 169, 233, 0.05);
+  border-radius: 0 6px 6px 0;
+}
+
+/* Links */
+a {
+  color: var(--math-accent);
+  text-decoration: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  position: relative;
+  transition: color var(--animation-speed);
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--math-accent);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  background-color: var(--accent-color);
+}
+
+/* Math content - Enhanced */
+.mathjax-inline {
+  transition: all 0.3s ease;
+  padding: 0 0.2em;
+  border-radius: 3px;
+  position: relative;
+  color: var(--math-accent);
+  text-shadow: 0 0 5px rgba(93, 169, 233, 0.2);
+}
+
+.mathjax-inline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--math-accent), transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.mathjax-inline:hover {
+  color: var(--accent-color);
+  transform: scale(1.05);
+  text-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+  background-color: rgba(22, 33, 62, 0.3);
+}
+
+.mathjax-inline:hover::before {
+  transform: scaleX(1);
+}
+
+div.math-display {
+  text-align: center;
+  margin: 2em 0;
+  padding: 1em;
+  background-color: rgba(22, 33, 62, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border-left: 3px solid var(--math-accent);
+  border-right: 3px solid var(--math-accent);
+}
+
+div.math-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(93, 169, 233, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+div.math-display:hover {
+  transform: scale(1.02) translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+div.math-display:hover::before {
+  opacity: 1;
+}
+
+img.math {
+  vertical-align: middle;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 3px rgba(93, 169, 233, 0.3));
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow var(--animation-speed);
+}
+
+table:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+table.tabular {
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0.75em 1em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background-color var(--animation-speed);
+}
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Table of contents */
+.tableofcontents {
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 1.5em;
+  border-left: 3px solid var(--primary-color);
+  margin: 2em 0;
+  border-radius: 0 4px 4px 0;
+  transition: transform var(--animation-speed), box-shadow var(--animation-speed);
+}
+
+.tableofcontents:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tableofcontents a {
+  display: inline-block;
+  transition: transform var(--animation-speed);
+}
+
+.tableofcontents a:hover {
+  transform: translateX(3px);
+}
+
+.sectionToc {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.subsectionToc {
+  margin-left: 1em;
+  margin-bottom: 0.3em;
+}
+
+.subsubsectionToc {
+  margin-left: 2em;
+  font-size: 0.95em;
+  margin-bottom: 0.2em;
+}
+
+/* Lists - Enhanced */
+ul, ol {
+  padding-left: 1.5em;
+  margin: 1.2em 0;
+}
+
+ul li, ol li {
+  margin-bottom: 0.8em;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 0.5em;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: -0.8em;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  background-color: var(--math-accent);
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+ol {
+  counter-reset: item;
+  list-style-type: none;
+}
+
+ol li {
+  counter-increment: item;
+  position: relative;
+}
+
+ol li::before {
+  content: counter(item) '.';
+  position: absolute;
+  left: -1.8em;
+  color: var(--math-accent);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+ul li:hover, ol li:hover {
+  transform: translateX(5px);
+  color: var(--math-accent);
+}
+
+ul li:hover::before {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+ol li:hover::before {
+  color: var(--accent-color);
+}
+
+/* Special styling for theorem lists */
+.subsectionHead + p + ol, .noindent + ol {
+  background-color: rgba(22, 33, 62, 0.2);
+  padding: 1em 1em 1em 3em;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-left: 3px solid var(--math-accent);
+}
+
+.subsectionHead + p + ol li, .noindent + ol li {
+  padding: 0.5em 0;
+  border-bottom: 1px dashed rgba(93, 169, 233, 0.2);
+}
+
+.subsectionHead + p + ol li:last-child, .noindent + ol li:last-child {
+  border-bottom: none;
+}
+
+/* Code blocks */
+pre.verbatim {
+  font-family: var(--code-font);
+  text-align: left;
+  clear: both;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  transition: background-color var(--animation-speed);
+}
+
+pre.verbatim:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+code.verb {
+  font-family: var(--code-font);
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  transition: background-color var(--animation-speed);
+}
+
+code.verb:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Title section - Enhanced */
+div.maketitle {
+  text-align: center;
+  margin-bottom: 3em;
+  padding: 2em 1.5em;
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(74, 111, 165, 0.1) 0%, rgba(93, 169, 233, 0.2) 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.2s ease-in-out;
+  border-left: 4px solid var(--accent-color);
+  border-right: 4px solid var(--primary-color);
+}
+
+div.maketitle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+div.author, div.date {
+  text-align: center;
+  margin-top: 0.8em;
+  animation: slideIn 1s ease-in-out;
+  position: relative;
+}
+
+div.author {
+  font-style: italic;
+  color: var(--math-accent);
+  font-weight: 500;
+}
+
+div.date {
+  font-size: 0.9em;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Theorem and Result Sections - Enhanced with Border Animations */
+.subsectionHead, .sectionHead {
+  position: relative;
+  padding: 1.2em 1.5em;
+  margin: 2.5em 0 1.8em;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sectionHead {
+  background: linear-gradient(145deg, rgba(22, 33, 62, 0.7) 0%, rgba(22, 33, 62, 0.9) 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.subsectionHead {
+  background: linear-gradient(145deg, rgba(22, 33, 62, 0.5) 0%, rgba(22, 33, 62, 0.7) 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated border effect */
+.sectionHead::before, .subsectionHead::before,
+.sectionHead::after, .subsectionHead::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(90deg, var(--accent-color), var(--math-accent));
+  transition: all 0.6s ease;
+}
+
+/* Horizontal borders */
+.sectionHead::before, .subsectionHead::before {
+  height: 3px;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.sectionHead::after, .subsectionHead::after {
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  right: -100%;
+}
+
+/* Vertical borders using pseudo-elements of child spans */
+.sectionHead .titlemark::before, .subsectionHead .titlemark::before,
+.sectionHead .titlemark::after, .subsectionHead .titlemark::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(180deg, var(--accent-color), var(--math-accent));
+  transition: all 0.6s ease;
+}
+
+.sectionHead .titlemark::before, .subsectionHead .titlemark::before {
+  width: 3px;
+  height: 100%;
+  top: -100%;
+  left: 0;
+}
+
+.sectionHead .titlemark::after, .subsectionHead .titlemark::after {
+  width: 3px;
+  height: 100%;
+  bottom: -100%;
+  right: 0;
+}
+
+/* Hover animations */
+.sectionHead:hover::before, .subsectionHead:hover::before {
+  left: 0;
+}
+
+.sectionHead:hover::after, .subsectionHead:hover::after {
+  right: 0;
+}
+
+.sectionHead:hover .titlemark::before, .subsectionHead:hover .titlemark::before {
+  top: 0;
+}
+
+.sectionHead:hover .titlemark::after, .subsectionHead:hover .titlemark::after {
+  bottom: 0;
+}
+
+/* Glow effect on hover */
+.sectionHead:hover, .subsectionHead:hover {
+  box-shadow: 0 8px 25px rgba(93, 169, 233, 0.2);
+  transform: translateY(-3px);
+}
+
+.subsubsectionHead {
+  position: relative;
+  padding: 0.8em 1.2em;
+  margin: 1.8em 0 1.2em;
+  background-color: rgba(22, 33, 62, 0.3);
+  border-radius: 6px;
+  border-left: 3px solid var(--primary-color);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.subsubsectionHead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.subsubsectionHead:hover {
+  background-color: rgba(22, 33, 62, 0.4);
+  transform: translateX(5px);
+}
+
+.subsubsectionHead:hover::after {
+  transform: scaleX(1);
+}
+
+/* Responsive design - Enhanced */
+@media (max-width: 768px) {
+  body {
+    padding: 0.5em;
+  }
+  
+  .content-container {
+    padding: 1.2rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 8px;
+  }
+  
+  h2.titleHead {
+    font-size: 1.8em;
+  }
+  
+  .tableofcontents {
+    padding: 1em;
+    overflow-x: auto;
+  }
+  
+  div.maketitle {
+    padding: 1.5em 1em;
+    margin-bottom: 2em;
+  }
+  
+  .sectionHead, .subsectionHead {
+    padding: 0.8em 1em;
+    margin: 1.5em 0 1em;
+  }
+  
+  .subsubsectionHead {
+    padding: 0.6em 1em;
+  }
+  
+  .math-symbol {
+    font-size: 1.5rem;
+  }
+  
+  p.indent {
+    text-indent: 1.2em;
+    padding-left: 0.8em;
+  }
+  
+  p.noindent {
+    padding: 0.6em 0.8em;
+  }
+  
+  .subsectionHead + p, .subsubsectionHead + p {
+    padding-left: 0.8em;
+    margin-left: 0.5em;
+  }
+  
+  .subsectionHead + p + ol, .noindent + ol {
+    padding: 0.8em 0.8em 0.8em 2.5em;
+  }
+  
+  div.math-display {
+    padding: 0.8em 0.5em;
+    margin: 1.5em 0;
+    overflow-x: auto;
+  }
+  
+  .mathjax-inline {
+    padding: 0 0.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  h2.titleHead {
+    font-size: 1.5em;
+  }
+  
+  h3 {
+    font-size: 1.3em;
+  }
+  
+  h4 {
+    font-size: 1.1em;
+  }
+  
+  .content-container {
+    padding: 0.8rem;
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
+    border-radius: 6px;
+  }
+  
+  div.maketitle {
+    padding: 1.2em 0.8em;
+    border-width: 3px;
+  }
+  
+  .sectionHead, .subsectionHead {
+    padding: 0.7em 0.8em;
+  }
+  
+  .subsubsectionHead {
+    padding: 0.5em 0.8em;
+  }
+  
+  ol li::before {
+    left: -1.5em;
+  }
+  
+  ul li::before {
+    left: -0.6em;
+  }
+  
+  .social-links {
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    min-width: 100%;
+  }
+}

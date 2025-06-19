@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usepackage{cleveref}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exdef}{Example}[defn]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{exercise}{Exercise}[section]
+
+
+\title{Applications Of Sylow Theorem}
+\author{ATRAJIT SARKAR}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Sylow Theorems}
+\label{sec:sylow theorems}
+\subsection{Sylow 1st Theorem:}
+\label{subsec:sylow 1st thm}
+Every Finite group $G$ has a sylow $p$ subgroup denoted as $Syl_p(G)$. And if $|G|=p^nm$ where
+$p \nmid m$ then $|Syl_p(G)|=p^n$.
+
+\subsection{Sylow 2nd Theorem:}
+\label{subsec: sylow 2nd thm}
+Every sylow $p$ subgroups are conjugat to eachother,i.e. let $P$ and $Q$ are two $syl_p(G)$ then $\exists g\in G$ s.t. $Q=gPg^{-1}$.
+
+\subsection{Sylow 3rd Theorem:}
+\label{subsec:sylow 3rd thm}
+Number of sylow $P$ subgroup $n_p$ satisfies the following two properties:
+\begin{enumerate}
+    
+    \item $n_p \mid m$ where $m=\frac{|G|}{p^n}$ and $p \nmid m$
+    \item $n_p \equiv 1$ (mod $p$)
+\end{enumerate}
+
+\section{Applications}
+\label{sec:application}
+\subsection{Question 1}
+\label{subsec:q1}
+Let $|G|=56$ then does it have a normal $Syl_p(G)$?\\
+
+Answer: $|G=2^3.7$. So, it has $Syl_2(G)$ and $syl_7(G)$. Now,\\
+$n_2|7$ and $n_2 \equiv 1$ (mod $2$) according to the sylow 3rd theorem given in \cref{subsec:sylow 3rd thm}\\
+So, by the above results, we get $n_2=1,7$.
+Similarly, $n_7=1,8$.\\
+If $n_2=1$ or $n_7=1$ we are done by the second sylow theorem given in \cref{subsec: sylow 2nd thm}. So, let $n_2=7$ and $n_7=8$.\\
+
+Let $2_1,2_2,\cdots 2_7$ be$Syl_2(G)$ with $2_i \neq 2_j$ for $i \neq j$.\\
+Now, $2_i \cap 2_j \leq 2_i$. So, by the Lagrange theorem $|2_i \cap 2_j|\mid |2_i|=8$. So, $|2_i\cap 2_j|=1,2,4,8$.\\
+But if $|2_i\cap 2_j|=8 \implies 2_i \cap 2_j=2_i \implies 2_j\subseteq 2_i$. But $|2_i|=|2_j|=8 \implies 2_i=2_j$, which is the opposite of what we assumed.
+So, $|2_i\cap 2_j|\neq 8$. So, we assume $|2_i\cap 2_j|=4$ to arrive at a contradiction that total number of elements in sylow 2 subgroups overflows. to do that taking maximum number of order of intersection is enough as taking smaller number of intersection case then certainly overflow. So, total number of distinct elements together is $7 \times (8-4)=28$.
+Now, consider $7_1,7_2,\cdots 7_8$ are sylow 7 subgroups with $7_i\neq 7_j$ whenever $i\neq j$. Similarly, $|7_i\cap 7_j|\neq 7$ hence $|7_i\cap 7_j|=1$ and number of distinct elemnts in all sylow 7 subgroups together $8 \times (7-1)=48$.\\
+
+Finally, 28 and 48 elements all are distinct, as $28$ elements have order either 2 or 4 or 8 and 48 elements have order 7. Hence total distinct elements are $28+48=76>56$, a contradiction that $|G=56$. Hence, either $n_2=1$ or $n_7=1$ giving either sylow 2 or sylow 7 subgroup is normal in $G$.
+
+\subsection{Question2}
+\label{subsec:q2}
+Let $|G|=28$, show there is atleast one sylow p normal subgroup.
+
+\subsection{Question3[*]}
+\label{subsec:q3}
+Let $|G=pq$ with $p>q$, then prove that $Syl_p(G) \trianglelefteq G$.
+
+\subsection{Question4[**]}
+\label{subsec:q4}
+Let $|G|=pq$ where $p<q$ and $p \nmid q-1$, then show that $Syl_p(G) \trianglelefteq G.$\\
+Use \cref{subsec:q3} to prove that $Syl_q(G) \trianglelefteq G$.
+
+\subsection{Extras}
+\label{subsec:extras}
+\subsubsection{Lemma}
+\label{subsubsec:lemma1}
+Let $(G,.)$ and $(H,*)$ be two different groups then $(G \times H,\odot)$ be a new group with some new operation $\odot$.\\
+
+\textbf{Question:} Try to find the operation $\#$ and prove the lemma.
+
+\subsubsection{Lemma}
+\label{subsubsec:lemma2}
+If $H,K\leq G$ and ($H \trianglelefteq G$ or $K \trianglelefteq G$) then $HK \leq G$. Moreover, if both are normal subgroups then $HK=KH$.
+
+\subsubsection{Lemma}
+\label{subsubsec:lemma3}
+Let $G$ be a group and $K,H \leq G$ with
+\begin{enumerate}
+    \item $H,K \trianglelefteq G$
+    \item $H \cap K =\{e\}$
+    \item $G=HK$ [using lemma 2.5.2 we see that $HK$ is a group]
+\end{enumerate}
+Then $G \cong H\times K$. [$(H\times K,\odot)$ is a group by the 2.5.1 lemma as you have proved earlier. Here also find the operation $\odot$].
+
+\subsubsection{Lemma}
+\label{subsubsec:lemma4}
+Let $H,K \leq G$, then $|HK|=\frac{|H|.|K|}{|H \cap K|}$
+\subsubsection{Lemma}
+\label{subsubsec:lemma5}
+$\mathbb{Z}_{mn} \cong \mathbb{Z}_n \times \mathbb{Z}_m$ if $gcd(m,n)=1$.
+
+\subsubsection{Question[***]}
+\label{subsubsec:q6}
+See \cref{subsec:q4} queston no.4 prove that $G \cong \mathbb{Z}_{pq}$. In otherwords $G$ is a cyclic group.\\
+
+[Hint: Use the fact that prime order groups are always cyclic and use \cref{subsubsec:lemma3,subsubsec:lemma4,subsubsec:lemma5} ]
+\end{document}
